@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <link rel="shortcut icon" href="static/img/favicon.ico" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <title>{{ title }}</title>
+    {% if current_user.is_authenticated and current_user.name != 'admin' %}
+        <ul class="fail">
+          <li class="fall"><a href="/"><img class='photos' src="static/img/menu.png"> ГЛАВНАЯ</a></li>
+          <li class="fall"><a href="/about_our"><img class='exit' src="static/img/message.png"> О НАС</a></li>
+          <li class="fall" style="float:right"><a class="btn btn-success" href="/exit"><img class='exit' src="static/img/exit.png"> ВЫЙТИ</a></li>
+          <li class="fall" style="float:right"><a href="/profile"><img class='photos' src="static/img/contact.png"> МОЙ ПРОФИЛЬ</a></li>
+          <li class="fall" style="float:right"><a href="/basket"><img class='photos' src="static/img/bask.png"></a></li>
+        </ul>
+    {% endif %}
+    {% if not current_user.is_authenticated %}
+        <ul class="fail">
+          <li class="fall"><a href="/"><img class='photos' src="static/img/menu.png"> ГЛАВНАЯ</a></li>
+          <li class="fall"><a href="/about_our"><img class='exit' src="static/img/message.png"> О НАС</a></li>
+          <li class="fall" style="float:right"><a href="/register"><img class="exit" src="static/img/add_persons.png"> РЕГИСТРАЦИЯ</a></li>
+          <li class="fall" style="float:right"><a href="/login"><img class="exit" src="static/img/logins.png"> АВТОРИЗАЦИЯ</a></li>
+          <li class="fall" style="float:right"><a href="/basket"><img class='photos' src="static/img/bask.png"></a></li>
+        </ul>
+    {% endif %}
+    {% if current_user.is_authenticated and current_user.name == 'admin' %}
+        <ul class="fail">
+          <li class="fall"><a href="/"><img class='photos' src="static/img/menu.png"> ГЛАВНАЯ</a></li>
+          <li class="fall"><a href="/about_our"><img class='exit' src="static/img/message.png"> О НАС</a></li>
+          <li class="fall" style="float:right"><a href="/add_product"><img class="exit" src="static/img/add.png"> ДОБАВИТЬ ТОВАР</a></li>
+          <li class="fall" style="float:right"><a href="/exit"><img class='exit' src="static/img/exit.png"> ВЫЙТИ</a></li>
+        </ul>
+    {% endif %}
+
+</head>
+<style>
+.photos{
+margin-top: -10%;
+}
+.exit{
+margin-top: -4%;
+}
+ul.fail {
+    list-style-type: none;
+    margin-left: 5%;
+    padding: 0;
+    overflow: hidden;
+}
+li.fall {
+    float: left;
+}
+li.fall a{
+  border: medium none;
+  background-image: none;
+  background: transparent;
+  float: left;
+  background-color: transparent;
+  display: inline-block;
+  width: 210px;
+  height: 60px;
+  padding: 20px;
+  color: #000000;
+  text-align: center;
+  outline: none;
+  text-decoration: none;
+}
+li.fall a:hover:not(.active) {
+    background-color: #d2d7d3;
+}
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-image: url('static/img/font.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.name{
+color: blue;
+}
+#sidebar{
+	background: #151718;
+    width: 200px;
+	height: 100%;
+	display: block;
+	position: absolute;
+	left: -200px;
+	top: 0px;
+	transition:left 0.3s linear;
+}
+#sidebar.visible{
+	left: 0px;
+	transition: left 0.3s linear;
+}
+.menu{
+    border-radius: 20px;
+	width: 100%;
+	padding: 7%;
+}
+ul{
+	margin: 0 0 0 0;
+	padding: 0px;
+}
+
+ul li{
+	list-style:none;
+}
+
+ul li a{
+	background: #1C1E1F;
+	color: #ccc;
+	border-bottom: 1px solid #111;
+	display :block;
+	width: 180px;
+	padding: 10px;
+	text-decoration: none;
+}
+#sidebar-btn{
+	display: inline-block;
+	vertical-align: middle;
+	width: 20px;
+	height: 15px;
+	cursor: pointer;
+	margin: 20px;
+	position: absolute;
+	top: 0px;
+	right: -60px;
+}
+#sidebar-btn span{
+	height: 1px;
+	background: #111;
+	margin-bottom: 5px;
+	display: block;
+}
+#sidebar-btn span:nth-child(2){
+	width:75%;
+}
+#sidebar-btn span:nth-child(3){
+	width:50%;
+}
+a.boton1{
+  border-radius: 5px;
+  background: #eee;
+  color: #088;
+  text-decoration: none;
+  display: block;
+  width: 100px;
+  text-align: center;
+  margin: 20px auto;
+  padding: 10px 10px;
+  transition: all 0.3s;
+  }
+ a.boton1:hover{
+  box-shadow:0px -5px 0 #088 inset;
+}
+   #footer {
+    position: fixed;
+    left: 0; bottom: 0;
+    padding: 10px;
+    background: #39b54a;
+    color: #fff;
+    width: 100%;
+}
+   }
+</style>
+<body>
+<div id="footer">
+    &copy; <a href="https://vk.com/denis21226">Макарцев Денис</a>, <a href="https://vk.com/id227438422">Кирилл Моисеев</a>
+    <div align="right">Связь с нами: <a href="mailto:project_yandex_lyceum@mail.ru">project_yandex_lyceum@mail.ru</a></div>
+</div>
+<div id="sidebar">
+		<ul>
+			<li><a href="/electronics" class="boton1">Электроника</a></li>
+			<li><a href="/home" class="boton1">Дом</a></li>
+			<li><a href="/books" class="boton1">Книги</a></li>
+            <li><a href="/men" class="boton1">Мужчинам</a></li>
+            <li><a href="/prize" class="boton1">Подарки</a></li>
+            <li><a href="/cat" class="boton1">Зоотовары</a></li>
+            <li><a href="/sport" class="boton1">Спорт</a></li>
+            <li><a href="/car" class="boton1">Автотовары</a></li>
+		</ul>
+		<div id="sidebar-btn">
+			<span></span>
+			<span></span>
+			<span></span>
+		</div>
+	</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script>
+	$(document).ready(function(){
+		$('#sidebar-btn').click(function(){
+			$('#sidebar').toggleClass('visible');
+		});
+	});
+	</script>
+<div align="center">
+    {% block content %}{% endblock %}
+</div>
+</body>
+</html>

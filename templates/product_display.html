@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block content %}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<style>
+.product-wrapper {
+	display: block;
+	width: 100%;
+	float: left;
+	transition: width .2s;
+}
+@media only screen and (min-width: 450px) {
+	.product-wrapper {
+		width: 50%;
+	}
+}
+
+@media only screen and (min-width: 768px) {
+	.product-wrapper {
+		width: 33.333%;
+	}
+}
+
+@media only screen and (min-width: 1000px) {
+	.product-wrapper {
+		width: 25%;
+	}
+}
+.product {
+	display: block;
+	border: 1px solid #b5e9a7;
+	border-radius: 3px;
+	position: relative;
+	background: #fff;
+	margin: 20px 60px 60px 205px;
+	text-decoration: none;
+	color: #474747;
+	z-index: 0;
+	height: 400px;
+	width: 300px;
+}
+.products {
+	list-style: none;
+	margin: 0 -20px 0 0;
+	padding: 0;
+}
+.product p {
+	position: relative;
+	margin: 0;
+	padding: 10px;
+}
+</style>
+        <div style="font-size: 25px;">{{ message }}</div>
+<ul class="products clearfix">
+{% for item in products %}
+	<li class="product-wrapper">
+		<div class="product">
+			<img src={{item.img}}>
+			<p> {{item.name}}</p>
+			<p>{{item.about}}</p>
+			<p>{{item.cost}}</p>
+			<p>{{item.count}}</p>
+		{% if current_user.is_authenticated and current_user.name != 'admin' %}
+			<a href={{item.add_to_basket_id}} class="btn btn-success">Добавить в корзину</a>
+		{% endif %}
+		{% if not current_user.is_authenticated %}
+			<a href='/error_login_in' class="btn btn-success">Добавить в корзину</a>
+		{% endif %}
+		{% if current_user.is_authenticated and current_user.name == 'admin' %}
+			<a href="/del_product_admin/{{item.id}}" class="btn btn-danger">Удалить</a>
+		{% endif %}
+		</div>
+	</li>
+	{% if loop.index % 3 == 0 %}
+	<ul class="products clearfix">
+	</ul>
+	{% endif %}
+{% endfor %}
+</ul>
+{% endblock %}

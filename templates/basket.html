@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block content %}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<style>
+img {
+	height: auto;
+	max-width: 100%;
+}
+.content{
+	margin-top: 50px;
+}
+.product {
+	background: #fff none repeat scroll 0 0;
+	border: 1px solid #c0c0c0;
+	height: 390px;
+	overflow: hidden;
+	padding: 25px 15px;
+	position: relative;
+	text-align: center;
+	transition: all 0.5s ease 0s;
+	margin-bottom: 20px;
+}
+.product:hover {
+	box-shadow: 0 0 16px rgba(0, 0, 0, 0.5);
+}
+.product-img {
+	height: 200px;
+}
+.product-title a {
+	color: #000;
+	font-weight: 500;
+	text-transform: uppercase;
+}
+.product-desc {
+	max-height: 60px;
+	overflow: hidden;
+}
+.product-price {
+	bottom: 15px;
+	left: 0;
+	position: absolute;
+	width: 100%;
+	color: #d51e08;
+	font-size: 18px;
+	font-weight: 500;
+}
+.sdvig{
+padding: 0 0 0 40%;
+}
+</style>
+<table border="1" width="100%" cellpadding="5" style="background: #ebeeef">
+   <tr>
+	<th align="center">Фотография</th>
+    <th align="center">Название</th>
+    <th>Цена</th>
+	<th>Количество</th>
+</tr>
+{% for item in products %}
+<tr>
+    <td align="center"><img src="{{item[0].img}}"></td>
+    <td align="center">{{item[0].name}}</td>
+	<td align="center" style="font-size: 20px;">₽{{item[0].cost}}</td>
+	<td align="center" style="font-size: 20px;">{{item[1]}} <br> <a href='/del_basket/{{item[0].id}}' class="btn btn-danger">Удалить одну</a></div></td>
+</tr>
+{% endfor %}
+</table>
+<br>
+<a href="/arrange" class="btn btn-success">Оформить заказ</a>
+{% endblock %}
